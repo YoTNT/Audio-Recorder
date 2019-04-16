@@ -69,7 +69,7 @@ The image above is actually made as Mockups.
 
 
 ### [BONUS] Interactive Prototype
-
+<img src="https://github.com/YoTNT/Audio-Recorder/blob/master/walkthrough_audioRecorder.gif"><br>
 
 
 ## Schema 
