@@ -65,7 +65,7 @@ Audio recording and able to upload to a cloud point. Audios are accessibale and 
 
 ### [BONUS] Digital Wireframes & Mockups
 The image above is actually made as Mockups.
-
+<img src="https://github.com/YoTNT/Audio-Recorder/blob/master/Mockups.jpg" width=600><br>
 
 
 ### [BONUS] Interactive Prototype
