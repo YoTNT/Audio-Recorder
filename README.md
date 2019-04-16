@@ -1,5 +1,3 @@
-Group Project - README Template
-===
 # Audio Recorder
 
 ## Table of Contents
