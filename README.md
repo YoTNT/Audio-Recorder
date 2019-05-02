@@ -37,6 +37,8 @@ Audio recording and able to upload to a cloud point. Audios are accessibale and 
 * Short-cut button to instantly start record
 
 ### Video Walkthrough
+
+**Sign up and log in**
 <img src="https://github.com/YoTNT/Audio-Recorder/blob/master/login_signUp_audioRecorder.gif"><br>
 
 ### 2. Screen Archetypes
