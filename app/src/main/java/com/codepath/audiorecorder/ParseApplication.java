@@ -15,6 +15,6 @@ public class ParseApplication extends Application {
         Parse.initialize(new Parse.Configuration.Builder(this)
                 .applicationId("voicerecorder") // should correspond to APP_ID env variable
                 .clientKey("fangandjian")  // set explicitly unless clientKey is explicitly configured on Parse server
-                .server("http://voicerecorder.herokuapp.com/parse").build());
+                .server("https://voicerecorder.herokuapp.com/parse").build());
     }
 }

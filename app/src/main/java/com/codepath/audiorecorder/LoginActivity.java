@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
         btnGoToSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gotoMainActivity();
+                gotoSignUpActivity();
             }
         });
     }
@@ -78,5 +78,11 @@ public class LoginActivity extends AppCompatActivity {
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
         finish();
+    }
+
+    private void gotoSignUpActivity(){
+        Log.d(TAG, "Navigating to SignUpActivity!");
+        Intent i = new Intent(this, SignUpActivity.class);
+        startActivity(i);
     }
 }
