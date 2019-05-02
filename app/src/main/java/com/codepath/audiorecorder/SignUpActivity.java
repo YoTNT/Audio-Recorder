@@ -40,7 +40,7 @@ public class SignUpActivity extends AppCompatActivity {
                 String username=etSignUpName.getText().toString();
                 String password1= etSignUpPassword.getText().toString();
                 String password2= etConfirmPassword.getText().toString();
-                if(password1.equals(password2)){
+                if(!password1.equals(password2)){
                     Toast.makeText(SignUpActivity.this, "The password does not match!", Toast.LENGTH_LONG).show();
                 }
                 else{
