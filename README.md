@@ -36,6 +36,9 @@ Audio recording and able to upload to a cloud point. Audios are accessibale and 
 * User can modify their audio files such as cut audio
 * Short-cut button to instantly start record
 
+### Video Walkthrough
+<img src="https://github.com/YoTNT/Audio-Recorder/blob/master/login_signUp_audioRecorder.gif"><br>
+
 ### 2. Screen Archetypes
 
 * Login Screen
@@ -68,7 +71,6 @@ The image above is actually made as Mockups.
 
 ### [BONUS] Interactive Prototype
 <img src="https://github.com/YoTNT/Audio-Recorder/blob/master/walkthrough_audioRecorder.gif"><br>
-
 
 ## Schema 
 
