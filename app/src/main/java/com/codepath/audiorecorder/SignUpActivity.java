@@ -32,7 +32,7 @@ public class SignUpActivity extends AppCompatActivity {
         etSignUpPassword=findViewById(R.id.etSignUpPassword);
         etConfirmPassword=findViewById(R.id.etConfirmPassword);
         btnSignUp=findViewById(R.id.btnSignUp);
-        btnCancel=findViewById(R.id.btnCancel);
+        btnCancel=findViewById(R.id.btnStop);
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
