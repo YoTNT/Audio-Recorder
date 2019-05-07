@@ -41,6 +41,7 @@ Audio recording and able to upload to a cloud point. Audios are accessibale and 
 
 **Sign up and log in**
 <img src="https://github.com/YoTNT/Audio-Recorder/blob/master/login_signUp_audioRecorder.gif"><br>
+<img src="https://github.com/YoTNT/Audio-Recorder/blob/master/walkthrough.gif"><br>
 
 ### 2. Screen Archetypes
 
