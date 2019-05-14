@@ -82,7 +82,7 @@ public class RecordingActivity extends AppCompatActivity {
                     btnFinish.setEnabled(true);
 
                     Toast.makeText(RecordingActivity.this, "Recording ...",
-                            Toast.LENGTH_LONG).show();
+                            Toast.LENGTH_SHORT).show();
                 } else {
                     requestPermission();
                 }
@@ -124,7 +124,7 @@ public class RecordingActivity extends AppCompatActivity {
 
                 mediaPlayer.start();
                 Toast.makeText(RecordingActivity.this, "Audio Playing",
-                        Toast.LENGTH_LONG).show();
+                        Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -159,7 +159,6 @@ public class RecordingActivity extends AppCompatActivity {
                     return;
                 }
                 savePost(user);
-                deleteFile();
             }
         });
 
@@ -205,6 +204,7 @@ public class RecordingActivity extends AppCompatActivity {
                     return;
                 }
                 Log.d(TAG,"Save Success");
+                Toast.makeText(RecordingActivity.this, "Upload Successfully", Toast.LENGTH_SHORT).show();
             }
         });
     }

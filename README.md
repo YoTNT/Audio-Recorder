@@ -26,8 +26,8 @@ Audio recording and able to upload to a cloud point. Audios are accessibale and 
 - [x ] Users can sign up an account
 - [x ] Users can login to their accounts
 - [x ] Users can record and play their audio
-- [ ] Users can view, play, delete their audio files in their profile page
-- [ ] Users can upload their audio files to the cloud, or download the files from the cloud
+- [x ] Users can view, play, delete their audio files
+- [x ] Users can upload their audio files to the cloud
 
 
 **Optional Nice-to-have Stories**
