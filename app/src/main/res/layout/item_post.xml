@@ -10,6 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:gravity="center_horizontal"
         android:text="TextView" />
 
     <TextView
@@ -30,6 +31,7 @@
         android:id="@+id/iPlayAndStop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/cardview_compat_inset_shadow"
         android:layout_weight="1"
-        android:text="Button" />
+        android:text="Play" />
 </LinearLayout>
