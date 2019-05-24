@@ -139,6 +139,11 @@ public class MainActivity extends AppCompatActivity {
                     // Change the feature of the button to be record
                     recorderButton.setBackgroundResource(R.drawable.record);
                     canRecord = true;
+
+                    // Refresh the list in the main screen
+                    mPosts.clear();
+                    queryPosts();
+                    adapter.notifyDataSetChanged();
                 }
             }
         });

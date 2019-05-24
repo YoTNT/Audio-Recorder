@@ -5,6 +5,8 @@ import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @ParseClassName("Post")
@@ -53,6 +55,11 @@ public class Post extends ParseObject {
 
     public void setName(String name){ put(KEY_NAME,name); }
 
-    public Date getCreateTime(){ return getCreatedAt(); }
+    public String getCreateTime(){
+        Date dt = getDate(KEY_CREATED_AT);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+        String strDate = dateFormat.format(dt);
+        return strDate;
+    }
 
 }

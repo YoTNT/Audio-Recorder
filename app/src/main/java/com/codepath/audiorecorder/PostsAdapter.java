@@ -77,7 +77,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            //iuHandle = itemView.findViewById(R.id.iuHandle);
+            iuHandle = itemView.findViewById(R.id.iuHandle);
             iSize = itemView.findViewById(R.id.iSize);
             iDuration = itemView.findViewById(R.id.iDuration);
         }
@@ -94,6 +94,10 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
             else{
                 Log.d(TAG, "Audio not found!");
             }
+
+            // Set iuHandle, the file name to be createAt
+            String fileName = String.valueOf(post.getCreatedAt());
+            iuHandle.setText((fileName));
 
             iSize.setText(post.getFileSize());
             iDuration.setText(post.getDuration());
