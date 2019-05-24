@@ -5,13 +5,17 @@ import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
+import java.util.Date;
+
 @ParseClassName("Post")
 public class Post extends ParseObject {
 
     public static final String KEY_USER = "user";
+    public static final String KEY_NAME = "name";
     public static final String KEY_AUDIO = "audio";
     public static final String KEY_SIZE = "size";
     public static final String KEY_DURATION = "duration";
+    public static final String KEY_CREATED_AT = "createAt";
 
     public ParseFile getAudio(){
         return getParseFile(KEY_AUDIO);
@@ -44,4 +48,11 @@ public class Post extends ParseObject {
     public void setDuration(String duration){
         put(KEY_DURATION,duration);
     }
+
+    public String getName(){ return getString(KEY_NAME);}
+
+    public void setName(String name){ put(KEY_NAME,name); }
+
+    public Date getCreateTime(){ return getCreatedAt(); }
+
 }
