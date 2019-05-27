@@ -20,19 +20,13 @@ import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.parse.DeleteCallback;
-import com.parse.Parse;
-import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
@@ -48,8 +42,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-/************************************************/
-
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "Main Activity";
@@ -58,42 +50,39 @@ public class MainActivity extends AppCompatActivity {
     private PostsAdapter adapter;
     private List<Post> mPosts;
 
-    // Recorder button relative
-    static boolean canRecord = true;
-
-    // Recording function relative variables
-    /*************************************************/
     String AudioFilename = null;
     MediaRecorder mediaRecorder;
     MediaPlayer mediaPlayer;
+
     private static final int RequestPermissionCode = 1;
-    /*************************************************/
+    private static boolean isRecordable = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
+        //setContentView(R.layout.fragment_posts);
+
         rvPosts=findViewById(R.id.rvPosts);
         mPosts=new ArrayList<>();
         adapter=new PostsAdapter(this,mPosts);
+
         rvPosts.setLayoutManager(new LinearLayoutManager(this));
         rvPosts.setAdapter(adapter);
-        //setContentView(R.layout.fragment_posts);
 
         queryPosts();
 
-        // Recording function relative code
-        final Button recorderButton = findViewById(R.id.recorderButton);
-        recorderButton.setOnClickListener(new View.OnClickListener(){
+        // Create button that are able to switch from record and stop mode
+        final Button btnRecord = findViewById(R.id.btnRecord);
+        btnRecord.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
 
-                // Button is ready for recording
-                if(canRecord){
-                    // Checking permission
+                // Check if the button is set in record mode
+                if(isRecordable){
+                    // Check permission
                     if(checkPermission()){
-                        // Getting the current time
+                        // Get the current time and use for filename
                         SimpleDateFormat time_format = new SimpleDateFormat("yy_MM_dd_HH_mm_ss", Locale.US);
                         Date now = new Date();
                         String fileName = time_format.format(now) + ".3gp";
@@ -111,14 +100,15 @@ public class MainActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
 
-                        // Change the feature of the button to be stop
-                        recorderButton.setBackgroundResource(R.drawable.stop);
-                        canRecord = false;
+                        // Change button to stop mode
+                        btnRecord.setBackgroundResource(R.drawable.stop);
+                        isRecordable = false;
                     } else {
                         requestPermission();
                     }
                 }
-                // Button is ready for stopping and uploading
+
+                // Button is in Stop mode and begin to upload
                 else{
                     // Stop recording
                     mediaRecorder.stop();
@@ -126,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
                     SetUpMediaRecorder();
 
                     // Uploading
-                    /***********************/
                     ParseUser user = ParseUser.getCurrentUser();
                     if(AudioFilename == null){
                         Log.e(TAG, "Upload Error!");
@@ -134,11 +123,10 @@ public class MainActivity extends AppCompatActivity {
                     }
                     savePost(user);
                     Toast.makeText(MainActivity.this,"Record stop and uploaded!", Toast.LENGTH_SHORT).show();
-                    /***********************/
 
                     // Change the feature of the button to be record
-                    recorderButton.setBackgroundResource(R.drawable.record);
-                    canRecord = true;
+                    btnRecord.setBackgroundResource(R.drawable.record);
+                    isRecordable = true;
 
                     // Refresh the list in the main screen
                     mPosts.clear();
@@ -180,10 +168,12 @@ public class MainActivity extends AppCompatActivity {
         int result2 = ContextCompat.checkSelfPermission(getApplicationContext(), RECORD_AUDIO);
         return result1 == PackageManager.PERMISSION_GRANTED && result2 == PackageManager.PERMISSION_GRANTED;
     }
+
     // Recording - Requesting permission
     private void requestPermission(){
         ActivityCompat.requestPermissions(this, new String[]{WRITE_EXTERNAL_STORAGE, RECORD_AUDIO}, RequestPermissionCode);
     }
+
     // Recording - Set up for the recording
     private void SetUpMediaRecorder(){
         mediaRecorder = new MediaRecorder();
@@ -192,6 +182,7 @@ public class MainActivity extends AppCompatActivity {
         mediaRecorder.setAudioEncoder(MediaRecorder.OutputFormat.AMR_NB);
         mediaRecorder.setOutputFile(AudioFilename);
     }
+
     // Recording - Save the audio
     private void savePost(ParseUser parseUser){
         // Calculating the file size
@@ -204,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
         String duration=mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
         mmr.release();
 
-        /*********** Upload to the server ***********/
+        // Upload to the server
         Post post = new Post();
         post.setUser(parseUser);
         post.setAudio(new ParseFile(file));
@@ -223,6 +214,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     // Recordign - Delete audio file from server and the local device
     private void deleteAudio(String fileName){
         File file = new File(fileName);

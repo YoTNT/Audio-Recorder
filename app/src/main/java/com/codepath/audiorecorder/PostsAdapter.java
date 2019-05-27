@@ -1,7 +1,5 @@
 package com.codepath.audiorecorder;
 
-//Import the require libraries
-/**********************************/
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -12,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import com.parse.ParseFile;
 import java.util.List;
-/**********************************/
 
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
 
@@ -21,16 +18,12 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
     private Context context;
     private List<Post> posts;
 
-    //Constructor
-    /*******************************************************/
     public PostsAdapter(Context context, List<Post> posts) {
         this.context = context;
         this.posts = posts;
     }
-    /*******************************************************/
 
     //Override the methods for superclass
-    /*************************************************************************************/
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -48,38 +41,31 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
     public int getItemCount() {
         return posts.size();
     }
-    /*************************************************************************************/
 
 
     // Clean all elements of the RecycleView
-    /*********************************/
     public void clear() {
         posts.clear();
         notifyDataSetChanged();
     }
-    /*********************************/
 
     // Add a list of items to the RecycleView
-    /************************************************/
     public void addAll(List<Post> posts) {
         posts.addAll(posts);
         notifyDataSetChanged();
     }
-    /************************************************/
 
     //Set up information that are use to display on the RecycleView
-    /*********************************************************************************/
     class ViewHolder extends RecyclerView.ViewHolder{
 
-        private TextView iuHandle;
-        private TextView iSize;
-        private TextView iDuration;
+        private TextView tvName;
+        private TextView tvSize;
+        private TextView tvDuration;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            iuHandle = itemView.findViewById(R.id.iuHandle);
-            iSize = itemView.findViewById(R.id.iSize);
-            iDuration = itemView.findViewById(R.id.iDuration);
+            tvName = itemView.findViewById(R.id.tvName);
+            tvDuration = itemView.findViewById(R.id.tvDuration);
         }
 
         public void bind(Post post){
@@ -88,21 +74,17 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
             if(audio != null) {
                 String url = audio.getUrl();
                 url = url.substring(0, 4) + "s" + url.substring(4, url.length());
-                //Glide.with(context).load(url).into(ivImage);
                 Log.d(TAG, "Audio found!" + url);
             }
             else{
                 Log.d(TAG, "Audio not found!");
             }
 
-            // Set iuHandle, the file name to be createAt
+            // Set tvName, the file name to be createAt
             String fileName = String.valueOf(post.getCreatedAt());
-            iuHandle.setText((fileName));
+            tvName.setText((fileName));
 
-            iSize.setText(post.getFileSize());
-            iDuration.setText(post.getDuration());
+            tvDuration.setText(post.getDuration());
         }
-
     }
-    /*********************************************************************************/
 }
