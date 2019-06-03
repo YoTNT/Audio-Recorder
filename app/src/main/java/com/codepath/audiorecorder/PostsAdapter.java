@@ -1,14 +1,21 @@
 package com.codepath.audiorecorder;
 
 import android.content.Context;
+import android.media.MediaPlayer;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.parse.ParseFile;
+
+import java.io.IOException;
 import java.util.List;
 
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
@@ -34,7 +41,26 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Post post=posts.get(position);
+        final String fileName=post.getName();
+        Log.d(TAG,"You clicked on "+fileName);
         holder.bind(post);
+        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MediaPlayer mediaPlayer=new MediaPlayer();
+                String AudioFilename = Environment.getExternalStorageDirectory().getAbsolutePath() + "/"+fileName;
+                Log.d(TAG,"The Audiofilename is "+AudioFilename);
+                try {
+                    mediaPlayer.setDataSource(AudioFilename);
+                    mediaPlayer.prepare();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                mediaPlayer.start();
+                Toast.makeText(context,"Audio Playing",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -56,16 +82,15 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
     }
 
     //Set up information that are use to display on the RecycleView
-    class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder{
 
         private TextView tvName;
-        private TextView tvSize;
-        private TextView tvDuration;
+        private LinearLayout linearLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvName = itemView.findViewById(R.id.tvName);
-            tvDuration = itemView.findViewById(R.id.tvDuration);
+            tvName = itemView.findViewById(R.id.tvListenName);
+            linearLayout = itemView.findViewById(R.id.linearLayout);
         }
 
         public void bind(Post post){
@@ -80,11 +105,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
                 Log.d(TAG, "Audio not found!");
             }
 
-            // Set tvName, the file name to be createAt
-            String fileName = String.valueOf(post.getCreatedAt());
+            String fileName = post.getName();
             tvName.setText((fileName));
-
-            tvDuration.setText(post.getDuration());
         }
     }
 }
